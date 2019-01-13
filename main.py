@@ -2,6 +2,14 @@
 import time
 import random
 import numpy
+import sys
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--rows", help="(default 25)", type=int)
+parser.add_argument("--columns", help="(default 35)", type=int)
+parser.add_argument("--alive-cells", help="Qty of alive cells at start of game (default 100)", type=int)
+args = parser.parse_args()
 
 class GameOfLife:
     """
@@ -105,7 +113,12 @@ class GameOfLife:
             print(string)
 
 if __name__ == "__main__":
-    game = GameOfLife({'rows' : 25, 'cols' : 35, 'alive_cells' : 100})
+    rows = args.rows or 25
+    cols = args.columns or 35
+    alive_cells = args.alive_cells or 100
+    options = {'rows' : rows, 'cols' : cols, 'alive_cells' : alive_cells}
+    print('Starting game of life with:', options)
+    game = GameOfLife(options)
     game.start()
 
 
